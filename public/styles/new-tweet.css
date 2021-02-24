@@ -41,7 +41,7 @@ label {
   font-size: 0.8em;
 }
 
-button {
+.new-tweet button {
   border: none;
   margin: 0;
   padding: 0.25em 0.5em;
@@ -56,8 +56,8 @@ button {
   -moz-appearance: none;
 }
 
-button:hover,
-button:focus {
+.new-tweet button:hover,
+.new-tweet button:focus {
   background: #0076ad
 }
 
@@ -66,6 +66,6 @@ button:focus {
   outline-offset: -4px;
 }
 
-button:active {
+.new-tweet button:active {
   transform: scale(0.99);
 }
