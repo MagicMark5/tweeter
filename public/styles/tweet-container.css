@@ -1,6 +1,9 @@
+/* <section> and <article> parent containers */
+
 #tweet-container {
   width: 90%;
   margin: 2em 0; 
+  padding: 1em;
   overflow: scroll;
 }
 
@@ -11,8 +14,14 @@ article.tweet {
   overflow: scroll;
 }
 
+/* tweet header */
+
 article.tweet header {
-  height: 3em;
+  height: 2.5em;
+}
+
+article.tweet header > span {
+  display: none;
 }
 
 article.tweet header, 
@@ -22,42 +31,60 @@ article.tweet footer {
 }
 
 header > figure, 
-header > strong, 
-figcaption {
+header > span, 
+figcaption,
+.like-retweet-flag {
   display: flex;
   margin: 0;
   align-items: center;
 }
 
-article.tweet header > figure > img {
+article.tweet img {
   width: 3.5em;
   height: 3.5em;
 }
 
+/* tweet <p> */
+
 .tweet-body {
   padding: 0.75em;
-  padding-bottom: 1.5em;
+  padding-bottom: 1.25em;
   border-bottom: 4px solid #312f2f;
   margin-bottom: 0.05em;
 }
 
-.like-retweet-flag {
-  display: flex;
-  justify-content: center;
+/* tweet footer */
+
+article.tweet footer {
+  font-size: 0.8em;
 }
 
-.like-retweet-flag > button {
+.like-retweet-flag button {
   color: #4056A1;
   border: 0;
   cursor: pointer;
 }
 
-.like-retweet-flag > button > i {
+.like-retweet-flag i {
   width: 1em;
   height: 1em;
 }
 
+/* Hover states */
+
 .like-retweet-flag button:hover,
 .like-retweet-flag button:focus {
-  color: red;
+  color: #0076ad;
 }
+
+
+.tweet:hover {
+  box-shadow: 6px 3px 2px #0000ff33;
+  text-shadow: 1px 1px 2px #0000ff33
+}
+
+.tweet:hover span {
+  display: flex;
+  color: #0000ff33;
+}
+

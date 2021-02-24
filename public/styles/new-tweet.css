@@ -58,7 +58,7 @@ label {
 
 .new-tweet button:hover,
 .new-tweet button:focus {
-  background: #0076ad
+  background: #0076ad;
 }
 
 button:focus {
