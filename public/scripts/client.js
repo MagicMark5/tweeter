@@ -73,11 +73,34 @@ $(document).ready(function () {
   const ajaxRequest = function(formData) {
     //${formData}
     const url = `/tweets`;
-    console.log(formData);
     
     $.ajax(url, {
       method: "POST",
       data: formData,
+    })
+    .done(function(data) {
+      console.log("DONE! POST request made to /tweets");
+    })
+    .fail(function(error) {
+      console.log("Something went wrong :(", error);
+    })
+    .always(function() {
+      console.log("ajax request completed.");
+    });
+  };
+
+  // On form submit gives serialized query string to ajax request func, from <textarea name="tweet"> as tweet=query 
+  $('.new-tweet form').on('submit', function(event) {
+    event.preventDefault();
+    const formData = $(this).serialize();
+    ajaxRequest(formData);
+  });
+
+  // responsible for fetching tweets from the http://localhost:8080/tweets page.
+  const loadTweets = function() {
+    $.ajax({
+      url: '/tweets',
+      method: "GET"
     })
     .done(function(data) {
       // do something with data you get from response
@@ -89,17 +112,10 @@ $(document).ready(function () {
     })
     .always(function() {
       console.log("ajax request completed.");
-    })
+    });
   };
 
-  // On form submit gives serialized query string to ajax request func, from <textarea name="tweet"> as tweet=query 
-  $('.new-tweet form').on('submit', function(event) {
-    event.preventDefault();
-    const formData = $(this).serialize();
-    ajaxRequest(formData);
-  });
-
-
+  loadTweets();
 
 
   // Test / driver code (temporary)
