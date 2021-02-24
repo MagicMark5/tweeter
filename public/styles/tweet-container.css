@@ -39,9 +39,14 @@ figcaption,
   align-items: center;
 }
 
+article.tweet img,
+article.tweet figcaption {
+  margin: 3px;
+}
+
 article.tweet img {
-  width: 3.5em;
-  height: 3.5em;
+  width: 2em;
+  height: 2em;
 }
 
 /* tweet <p> */
