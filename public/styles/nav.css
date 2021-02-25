@@ -1,3 +1,5 @@
+/* container */
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -10,6 +12,89 @@ nav {
   top: 0;
 }
 
+/* Top Left side of nav */
+
 .logo {
   font-family: 'Bungee', cursive, sans-serif;
 }
+
+/* Top Right side of nav */ 
+
+.compose {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.compose button {
+  border: none;
+  margin: 0;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  background: #4056A1;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.compose button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+.compose i {
+  color: red;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-5px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+
+.compose i:hover {
+  animation: float 1.5s ease-in-out infinite;
+}
+
+/* Scroll up button */
+
+button.scroll-up {
+  visibility: hidden;
+  width: 3.5em;
+  height: 3.5em;
+  background-color: red;
+  border-radius: 50%;
+  border: 0;
+  z-index: 9;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+  transition: background 250ms ease-in-out, 
+              transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button.scroll-up:hover {
+  background-color: #0076ad;
+}
+
+button.scroll-up i {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+

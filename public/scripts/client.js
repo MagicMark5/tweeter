@@ -1,6 +1,25 @@
 // document ready event handler needed so that the browser does not load the page before we dynamically append elements
 $(document).ready(function () {
+    
+    // keeping track of new-tweet <section> display
+    let composeShowing = false;
 
+    // click handler for compose tweet button (to make new-tweet section slide in)
+    $('.compose button').on("click", function(event) {
+
+      composeShowing = !composeShowing ? true : false;
+
+      const $composeArea = $('section.new-tweet');
+      
+      $composeArea.slideToggle({
+        duration: 400,
+        start: function() {
+          $(this).css('display', 'flex');
+        }
+      });
+      $('#tweet-text').focus();
+    });
+  
   // escape strips potential html from tweets
   const escape =  function(str) {
     let div = document.createElement('div');
@@ -76,7 +95,7 @@ $(document).ready(function () {
     // then render all tweets together
     for (const tweet of tweets) {
       const $tweet = createTweetElement(tweet); 
-      $('#tweet-container').append($tweet); 
+      $('#tweet-container').prepend($tweet); 
     }
   };
   
@@ -107,7 +126,7 @@ $(document).ready(function () {
     $error.empty(); // clear current contents of <span>
     
     if ($error.css("display") !== "none") {
-      $error.slideToggle(200);
+      $error.slideToggle(100);
     } 
 
     if (formText === "" || formText === null) { 
@@ -120,7 +139,7 @@ $(document).ready(function () {
 
     // show validation error message
     $error.append(errorMsg);
-    $error.slideToggle(400);
+    $error.slideToggle(300);
 
     return false;
 
@@ -165,5 +184,34 @@ $(document).ready(function () {
 
   loadTweets();
   
+  // When document is scrolled down from top, fixes auto scroll up button position
+  const $scrollUp = $('button.scroll-up');
+
+  $(document).on('scroll', function(e) {
+    let scrollFromTop = $(window).scrollTop();
+
+    if (scrollFromTop > 200) {
+      $scrollUp.css('visibility', 'visible');
+    } else {
+      $scrollUp.css('visibility', 'hidden');
+    }
+
+    $scrollUp.css('position', 'fixed');
+  });
+
+
+  // Scroll up to top of page and show compose tweet if hidden
+  $scrollUp.on('click', function(e) {
+    e.preventDefault();
+    $(document).scrollTop(100);
+    
+    if (!composeShowing) {
+      $('.compose button').click();
+    }
+    
+    $scrollUp.css('visibility', 'hidden');
+    $(this).blur();
+    $('#tweet-text').focus();
+  });
   
 });
