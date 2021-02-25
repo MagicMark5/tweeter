@@ -1,6 +1,13 @@
 // document ready event handler needed so that the browser does not load the page before we dynamically append elements
 $(document).ready(function () {
 
+  // escape strips potential html from tweets
+  const escape =  function(str) {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+  
   // Returns an object with number values for date properties on the date object
   const getTimeData = (dateObj) => {  
     const timeData = {
@@ -13,7 +20,6 @@ $(document).ready(function () {
     };
     return timeData; 
   }; 
-
 
   // takes in a past timestamp and returns "x units of time ago"
   const convertTimeToRelative = (timestamp) => {
@@ -33,6 +39,7 @@ $(document).ready(function () {
         return `${now[time] - timeOfTweet[time]} ${time += plural} ago`;
       }
     }
+    return `Just a moment ago.`;
   };
 
   // Takes a single tweet Object and returns HTML article template with tweet data injected
@@ -47,7 +54,7 @@ $(document).ready(function () {
           <span>${tweetObj.user.handle}</span>
         </header>
 
-        <p class="tweet-body">${tweetObj.content.text}</p>
+        <p class="tweet-body">${escape(tweetObj.content.text)}</p>
 
         <footer>
           <small>${convertTimeToRelative(tweetObj.created_at)}</small> 
@@ -64,22 +71,26 @@ $(document).ready(function () {
   // loops through array of tweet objects, calls createTweetElement for each tweet
   // takes return value and appends it to the tweets container in index.html
   const renderTweets = function(tweets) {
+    // first clear the container
+    $('#tweet-container').empty();
+    // then render all tweets together
     for (const tweet of tweets) {
       const $tweet = createTweetElement(tweet); 
       $('#tweet-container').append($tweet); 
     }
   };
   
-  const ajaxRequest = function(formData) {
-    //${formData}
+  // makes POST ajax request to /tweets with serialized formData
+  const postTweet = function(formData) {
     const url = `/tweets`;
     
     $.ajax(url, {
       method: "POST",
       data: formData,
     })
-    .done(function(data) {
+    .done(function() {
       console.log("DONE! POST request made to /tweets");
+      loadTweets(); // Refetch tweets on success
     })
     .fail(function(error) {
       console.log("Something went wrong :(", error);
@@ -89,11 +100,37 @@ $(document).ready(function () {
     });
   };
 
+  // Validate tweet post submission before calling postTweet
+  const isDataValid = (formText) => {
+    
+    if (formText === "" || formText === null) {
+      alert("No silent/blank tweets! Tweet Something!");
+      return false;
+    } else if (formText.length > 140) {
+      alert("Your tweet is an epic ballad. Keep it below 140 characters.");
+      return false;
+    } else {
+      return formText; 
+    }
+
+  };
+
   // On form submit gives serialized query string to ajax request func, from <textarea name="tweet"> as tweet=query 
   $('.new-tweet form').on('submit', function(event) {
+    
     event.preventDefault();
-    const formData = $(this).serialize();
-    ajaxRequest(formData);
+
+    // select textarea value  
+    const tweet = $('#tweet-text').val();
+    // check char limit and if empty
+    const validData = isDataValid(tweet);
+
+    // only submit to postTweet if valid
+    if (validData) {
+      const formData = $(this).serialize();
+      postTweet(formData);
+      $('#tweet-text').val(""); // clear textarea
+    }
   });
 
   // responsible for fetching tweets from the http://localhost:8080/tweets page.
@@ -116,35 +153,6 @@ $(document).ready(function () {
   };
 
   loadTweets();
-
-
-  // Test / driver code (temporary)
-
-  // const data = [
-  //   {
-  //     "user": {
-  //       "name": "Newton",
-  //       "avatars": "https://i.imgur.com/73hZDYK.png"
-  //       ,
-  //       "handle": "@SirIsaac"
-  //     },
-  //     "content": {
-  //       "text": "If I have seen further it is by standing on the shoulders of giants"
-  //     },
-  //     "created_at": 1461116232227
-  //   },
-  //   {
-  //     "user": {
-  //       "name": "Descartes",
-  //       "avatars": "https://i.imgur.com/nlhLi3I.png",
-  //       "handle": "@rd" },
-  //     "content": {
-  //       "text": "Je pense , donc je suis"
-  //     },
-  //     "created_at": 1461113959088
-  //   }
-  // ];
-
   
   
 });
