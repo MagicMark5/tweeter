@@ -100,18 +100,29 @@ $(document).ready(function () {
     });
   };
 
-  // Validate tweet post submission before calling postTweet
+  // Validate tweet post submission and show error/validation message
   const isDataValid = (formText) => {
+    const $error = $('span.error-msg');
+    let errorMsg;
+    $error.empty(); // clear current contents of <span>
     
-    if (formText === "" || formText === null) {
-      alert("No silent/blank tweets! Tweet Something!");
-      return false;
+    if ($error.css("display") !== "none") {
+      $error.slideToggle(200);
+    } 
+
+    if (formText === "" || formText === null) { 
+      errorMsg = "Not even a chirp? Your tweet must contain some text."
     } else if (formText.length > 140) {
-      alert("Your tweet is an epic ballad. Keep it below 140 characters.");
-      return false;
+      errorMsg = "Your tweet is an epic ballad. Keep it below 140 characters.";
     } else {
-      return formText; 
+      return formText; // successful tweet
     }
+
+    // show validation error message
+    $error.append(errorMsg);
+    $error.slideToggle(400);
+
+    return false;
 
   };
 
