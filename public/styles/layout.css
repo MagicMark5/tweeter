@@ -21,12 +21,9 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-/*
- * Additional CSS can be defined below or in other CSS files, as per instructions
- */
-
 main {
    width: 90%;
+   max-width: 720px;
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -34,4 +31,5 @@ main {
    margin: 0 auto;
    background-color: #f4f1ec;
 }
+
 

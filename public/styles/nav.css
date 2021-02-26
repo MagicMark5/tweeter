@@ -6,6 +6,7 @@ nav {
   height: 120px;
   width: 100%;
   background-color: #4056A1;
+  background-image: url("https://www.transparenttextures.com/patterns/light-aluminum.png");
   color: #FFFFFF;
   padding: 1.5em;
   position: fixed;
@@ -25,6 +26,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .compose button {
@@ -32,8 +34,7 @@ nav {
   margin: 0;
   padding: 0.25em 0.5em;
   text-decoration: none;
-  background: #4056A1;
-  color: #ffffff;
+  background: inherit;
   cursor: pointer;
   text-align: center;
   -webkit-appearance: none;
@@ -50,6 +51,7 @@ nav {
   font-size: 1.5em;
   font-weight: bold;
   margin-top: 2px;
+  animation: float 1.5s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -62,11 +64,6 @@ nav {
 	100% {
 		transform: translatey(0px);
 	}
-}
-
-
-.compose i:hover {
-  animation: float 1.5s ease-in-out infinite;
 }
 
 /* Scroll up button */

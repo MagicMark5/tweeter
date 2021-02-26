@@ -1,0 +1,42 @@
+/* Mobile - font-size */
+@media only screen and (max-width: 420px) {
+
+  body { 
+     font-size: 1em; 
+  }
+
+  .compose b {
+    font-size: 0.75em;
+  }
+
+  .compose i {
+    font-size: 3em;
+  }
+
+}
+
+/* Tablets / Laptops / Desktops: */
+@media all and (min-width: 1024px) {
+  /* Write CSS rules that target Laptop/Desktop screen sizes and beyond */
+  
+  body {
+    display: flex;
+    padding-top: 200px;
+  }
+
+  body > nav {
+    background-color: #4056A1;
+  }
+  
+  body > header {
+    background-color: #4056A1;
+    width: 34%;
+    margin-top: 0;
+    margin-left: 30px;
+  }
+
+  section.new-tweet {
+    margin-top: 0;
+  }
+
+}

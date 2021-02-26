@@ -2,16 +2,14 @@
 
 #tweet-container {
   width: 90%;
-  margin: 2em 0; 
-  padding: 1em;
   overflow: scroll;
 }
 
 article.tweet {
   border: 4px solid #312f2f;
-  margin: 1em 0;
   padding: 0.5em;
   font-size: 1.1em;
+  margin: 1em 0;
 }
 
 /* tweet header */
