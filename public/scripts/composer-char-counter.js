@@ -5,19 +5,19 @@ $(document).ready(function() {
 
   // Callback function for input event to textarea
   const counterCB = function(e) {
-    const textarea = $(this); // use jquery selector on 'this' so we can use jquery methods on the textarea
+    const $textarea = $(this); // use jquery selector on 'this' so we can use jquery methods on the textarea
     const maxChars = 140;
-    const tweetLength = textarea.val().length; // can also use e.target.value.length
-    const counter = $(this).siblings('.tweet-button-area').children('.counter'); // Get the counter element
+    const tweetLength = $textarea.val().length; // can also use e.target.value.length
+    const $counter = $(this).siblings('.tweet-button-area').children('.counter'); // Get the counter element
 
     // Decrement the innerHTML value of our <output> element
-    counter.text(maxChars - tweetLength);
+    $counter.text(maxChars - tweetLength);
 
     // Changes counter <output> to red if character limit is exceeded
-    if (counter.val() < 0) {
-      counter.css( "color", "red" );
-    } else if (counter.val() >= 0) {
-      counter.removeAttr('style');
+    if ($counter.val() < 0) {
+      $counter.css( "color", "red" );
+    } else if ($counter.val() >= 0) {
+      $counter.removeAttr('style');
     }
   };
   

@@ -160,6 +160,7 @@ $(document).ready(function () {
       const formData = $(this).serialize();
       postTweet(formData);
       $('#tweet-text').val(""); // clear textarea
+      $('.counter').text(140); // reset counter
     }
   });
 
@@ -203,7 +204,7 @@ $(document).ready(function () {
   // Scroll up to top of page and show compose tweet if hidden
   $scrollUp.on('click', function(e) {
     e.preventDefault();
-    $(document).scrollTop(100);
+    $(document).scrollTop(70);
     
     if (!composeShowing) {
       $('.compose button').click();

@@ -1,0 +1,10 @@
+// Vertical Align
+@mixin verticalAlign() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+main,
+body > header, 
+.compose { @include verticalAlign(); }

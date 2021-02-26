@@ -1,0 +1,69 @@
+@import '_fonts-colours';
+
+nav {
+
+  display: flex;
+  justify-content: space-between;
+  height: 120px;
+  width: 100%;
+  background-color: $colourBrand;
+  background-image: url("https://www.transparenttextures.com/patterns/light-aluminum.png");
+  color: #ffffff;
+  padding: 1.5em;
+  position: fixed;
+  top: 0;
+
+  // Top Left "TWEETER"
+  .logo { font-family: $fontLogo }
+
+  // Top right of nav ('Write A Tweet') 
+  .compose {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    button {
+      border: none;
+      margin: 0;
+      padding: 0.25em 0.5em;
+      text-decoration: none;
+      background: inherit;
+      cursor: pointer;
+      text-align: center;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+        
+      // double down angle bracket
+      i {
+        color: red;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 2px;
+        animation: float 1.5s ease-in-out infinite;
+      }
+    }
+
+    button:focus {
+      outline: 1px solid #fff;
+      outline-offset: -4px;
+    }
+  }  
+}
+
+// button float animation
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-5px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+
+
