@@ -5,11 +5,9 @@ Tweeter is a simple, single-page Twitter clone.
 This repository has HTML, CSS, JS, jQuery and AJAX on the front-end, 
 and Node, Express and MongoDB on the back-end.
 
+!["Composing a new tweet, and user interface"](https://github.com/MagicMark5/tweeter/blob/master/docs/tweeter_screenshots/composing_tweet_UI.png?raw=true)
 
-
-!["Composing a new tweet, and user interface"](https://github.com/MagicMark5/tweeter/blob/master/docs/tweeter_screenshots/tweeter_UI.png?raw=true)
-
-!["Viewing recent tweets"](https://github.com/MagicMark5/tweeter/blob/master/docs/tweeter_screenshots/recent_tweets.png?raw=true)
+!["Scrolling through tweets feed"](https://github.com/MagicMark5/tweeter/blob/master/docs/tweeter_screenshots/recent_tweets.png?raw=true)
 
 !["Trying to tweet a short novel (above 140 characters)"](https://github.com/MagicMark5/tweeter/blob/master/docs/tweeter_screenshots/char_maxout.png?raw=true)
 
