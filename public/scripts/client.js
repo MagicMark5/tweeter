@@ -1,65 +1,11 @@
-// document ready event handler needed so that the browser does not load the page before we dynamically append elements
 $(document).ready(function () {
-    
-    // keeping track of new-tweet <section> display
-    let composeShowing = false;
-
-    // click handler for compose tweet button (to make new-tweet section slide in)
-    $('.compose button').on("click", function(event) {
-
-      composeShowing = !composeShowing ? true : false;
-
-      const $composeArea = $('section.new-tweet');
-      
-      $composeArea.slideToggle({
-        duration: 400,
-        start: function() {
-          $(this).css('display', 'flex');
-        }
-      });
-      $('#tweet-text').focus();
-    });
   
-  // escape strips potential html from tweets
+  // strips potential html tags from tweets
   const escape =  function(str) {
     let div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }
-  
-  // Returns an object with number values for date properties on the date object
-  const getTimeData = (dateObj) => {  
-    const timeData = {
-      year: dateObj.getFullYear(), // 2016
-      month: dateObj.getMonth() + 1, // 4 (for April)
-      day: dateObj.getUTCDate(), // 20 (for 20th)
-      hour: dateObj.getHours(), // 21 (24 hour clock)
-      minute: dateObj.getMinutes(), // 37
-      second: dateObj.getSeconds() // 12
-    };
-    return timeData; 
-  }; 
-
-  // takes in a past timestamp and returns "x units of time ago"
-  const convertTimeToRelative = (timestamp) => {
-
-    const timeOrder = ["year", "month", "day", "hour", "minute", "second"];
-
-    // Time of Tweet object (multiplied by 1000 to convert seconds into ms)
-    const timeOfTweet = getTimeData(new Date(timestamp)); 
-    
-    // Time of Now object
-    const now = getTimeData(new Date(Date.now()));
-
-    // loop through key names of timeOrder and the first inequality will be returned as relative time difference
-    for (let time of timeOrder) {
-      if (now[time] !== timeOfTweet[time]) {
-        let plural = now[time] - timeOfTweet[time] === 1 ? "" : "s";
-        return `${now[time] - timeOfTweet[time]} ${time += plural} ago`;
-      }
-    }
-    return `Just a moment ago.`;
-  };
 
   // Takes a single tweet Object and returns HTML article template with tweet data injected
   const createTweetElement = function(tweetObj) {
@@ -108,14 +54,13 @@ $(document).ready(function () {
       data: formData,
     })
     .done(function() {
-      console.log("DONE! POST request made to /tweets");
       loadTweets(); // Refetch tweets on success
     })
     .fail(function(error) {
       console.log("Something went wrong :(", error);
     })
     .always(function() {
-      console.log("ajax request completed.");
+      console.log("Ajax POST tweet to server completed.");
     });
   };
 
@@ -171,48 +116,16 @@ $(document).ready(function () {
       method: "GET"
     })
     .done(function(data) {
-      // do something with data you get from response
       renderTweets(data);
-      console.log("DONE!");
     })
     .fail(function(error) {
-      console.log("Something went wrong :(", error);
+      console.log("Error: ", error);
     })
     .always(function() {
-      console.log("ajax request completed.");
+      console.log("AJAX GET tweets from server completed.");
     });
   };
 
   loadTweets();
-  
-  // When document is scrolled down from top, fixes auto scroll up button position
-  const $scrollUp = $('button.scroll-up');
-
-  $(document).on('scroll', function(e) {
-    let scrollFromTop = $(window).scrollTop();
-
-    if (scrollFromTop > 200) {
-      $scrollUp.css('visibility', 'visible');
-    } else {
-      $scrollUp.css('visibility', 'hidden');
-    }
-
-    $scrollUp.css('position', 'fixed');
-  });
-
-
-  // Scroll up to top of page and show compose tweet if hidden
-  $scrollUp.on('click', function(e) {
-    e.preventDefault();
-    $(document).scrollTop(70);
-    
-    if (!composeShowing) {
-      $('.compose button').click();
-    }
-    
-    $scrollUp.css('visibility', 'hidden');
-    $(this).blur();
-    $('#tweet-text').focus();
-  });
   
 });
