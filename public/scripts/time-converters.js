@@ -26,16 +26,6 @@ const convertTimeToRelative = (timestamp) => {
 
   const timeOrder = ["year", "month", "day", "hour", "minute", "second"];
 
-  /* ----- NOTE ----- */
-  // tweetDate and nowDate are logged only to show the reader there is a bug in how
-  // the timestamp is retrieved, which explains why the 11 minute/second adjust is addeed
-
-  // Uncomment this code and test to see for yourself if you are curious...
-  // let tweetDate = new Date(timestamp);
-  // console.log(tweetDate);
-  // let nowDate = new Date(Date.now());
-  // console.log(nowDate);
-
   const now = getTimeData(new Date(Date.now()));
   const timeOfTweet = getTimeData(new Date(timestamp));
   // adjust for time error (11 is a magic number)
