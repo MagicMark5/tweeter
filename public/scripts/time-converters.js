@@ -28,9 +28,6 @@ const convertTimeToRelative = (timestamp) => {
 
   const now = getTimeData(new Date(Date.now()));
   const timeOfTweet = getTimeData(new Date(timestamp));
-  // adjust for time error (11 is a magic number)
-  timeOfTweet.minute += 11;
-  timeOfTweet.second += 11;
 
   // loop through key names of timeOrder and the first inequality will be returned as relative time difference
     for (let time of timeOrder) {
